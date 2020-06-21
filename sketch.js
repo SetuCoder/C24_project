@@ -1,7 +1,10 @@
 
 const { Engine, World, Bodies, Body, Mouse, MouseConstraint, Constraint, Composite, Detector } = Matter;
+
 var tanker;
 var bgimg;
+
+var engine,world;
 
 function preload(){
     bgimg = loadImage("image.jpg")
@@ -12,6 +15,7 @@ function setup() {
     createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
+    
  
     tanker = new Tanker(180,340,44,80,PI/2.8);
     ground = new Ground(600,height,1200,10);
@@ -28,8 +32,6 @@ function draw() {
     Engine.update(engine);
 
     strokeWeight(3);
-    line(115,325,128,333);
-
     
     ball.display();
     back.display();
@@ -41,10 +43,12 @@ function draw() {
     
 }
 
-/*
-function mousePressesd(){
-        Matter.Body.setPosition(tanker.body, {x: mouseX});
-        Matter.Body.setPosition(back.body, {x: mouseX});
-        Matter.Body.setPosition(wheel.body, {x: mouseX});
+function keyPressed() {
+    angleMode(DEGREES)
+    if(keyCode === UP_ARROW){
+        tanker.body.angle=shooter.body.angle-15;
+    } else
+    if(keyCode === DOWN_ARROW){
+        tanker.body.angle=shooter.body.angle+15;
+    }
 }
-*/
